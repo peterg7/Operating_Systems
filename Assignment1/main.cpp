@@ -1,46 +1,36 @@
+/*
+ * Main class for Assignment2
+ * The trace file name should be specified as the first (and only) command line
+ * argument to the program. 
+ */
+
 /* 
  * File:   main.cpp
- * Author: Peter Gish
- *
- * Created on February 10, 2018, 5:23 PM
+ * Created By: Peter Gish
+ * Last Modified: 2/17/18
  */
-
-/*
- * The program should accept three arguments:
- * 1) input file name
- * 2) block_duration: the decimal integer time length that a process
- *                    is unavailable to fun after it blocks
- * 3) time_slice: the decimal integer of the time slice for the 
- *                Round-Robin scheduler
- * -Arguments are passed in the order shown above
- * 
- */
-
-#include "Scheduler.h"
 
 #include <cstdlib>
 #include <iostream>
-#include <sstream>
+#include <MMU.h>
 
-#include "Scheduler.h"
+#include "ProcessTrace.h"
 
+using namespace std;
 
+/*
+ * Create an instance of the MMU class with 256 (0x100) page frames (1MB of simulated
+ * physical memory). Do not enable TLB. Need to enable virtual memory mode
+ * and construct page tables
+ */
 int main(int argc, char** argv) {
-    if (argc != 4) {
-        std::cerr << "usage: Assignment1 input_file\n";
+    mem::MMU mem(0x100);
+    if(argc != 2){
+        std::cerr << "usage: Assignment 2 input_file" << std::endl;
         exit(1);
     }
-    std::istringstream ss1(argv[2]);
-    int block_duration;
-    if (!(ss1 >> block_duration))
-        std::cerr << "Invalid argument1 " << argv[2] << '\n';
-    std::istringstream ss2(argv[3]);
-    int time_slice;
-    if (!(ss2 >> time_slice))
-        std::cerr << "Invalid argument " << argv[3] << '\n';
-
-    Scheduler s(argv[1], block_duration, time_slice); //create scheduler object and pass in command line arguments
-
+    ProcessTrace trace(argv[1]);
+    trace.Execute();
     return 0;
 }
 
