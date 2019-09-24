@@ -1,0 +1,15 @@
+alloc 2000
+fill 1a00 80 d
+fill 1a80 70 e
+compare 1a7b d d d d d e e e e e
+fill 1a7e 4 c
+compare 1a7b d d d c c c c e e e
+put 1a7e 1 2 3 4
+compare 1a7b d d d 1 2 3 4 e e e
+put 1ae8 a8 a9 aa ab ac ad ae af
+compare 1ae6 e e a8 a9 aa ab ac ad ae af
+copy 1ff8 1ae6 8
+compare 1ff8 e e a8 a9 aa ab ac ad
+compare 1a7e d d e e
+dump 1a00 f0
+dump 1ff0 10

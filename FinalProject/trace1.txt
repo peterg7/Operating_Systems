@@ -1,0 +1,13 @@
+alloc 100
+put a0 81 82 83 84 85
+put a2 92
+compare a0 81 82 92 84 85
+put ff aa
+compare ff aa
+fill b 3 de
+compare a 0 de de de 0
+fill 20 10 cc
+copy 21 a0 6
+compare 20 cc 81 82 92 84 85 00 cc
+compare a0 81 82 92 84 85
+dump 0 100
